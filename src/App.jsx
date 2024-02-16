@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from "./Header/Header.jsx"
+import Footer from "./Footer/Footer.jsx"
+import Button from "./Button/Button.jsx"
+import WayToTeach from "./WayToTeach"
+import { useState } from "react";
+import { ways, differences } from "./data"
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [content, setContent] = useState('Нажми на кнопку')
+
+  
+  const handleClick = (type) => {
+    setContent(type)
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+
+      <main>
+
+        <section>
+          <h3>Автомомбили</h3>
+
+          <ul>
+            <WayToTeach title={ways[0].title} description={ways[0].description} />
+            <WayToTeach {...ways[1]} />
+            <WayToTeach {...ways[2]} />
+          </ul>
+        </section>
+
+        <section>
+          <h3>Особенности нашей компании</h3>
+        </section>
+
+      </main>
+
+      <Button onClickParam={() => handleClick('way')}>Подход</Button>
+      <Button onClickParam={() => handleClick('easy')}>Доступность</Button>
+      <Button onClickParam={() => handleClick('program')}>Концентрация</Button>
+
+      <p>{differences[content]}</p>
+
+      <Footer />
     </>
   )
 }
 
-export default App
