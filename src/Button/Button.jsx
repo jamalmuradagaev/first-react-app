@@ -1,10 +1,10 @@
 import React from 'react'
 import './Button.css'
 
-export default function Button({ children, onClickParam }) {
+export default function Button({ children, onClick, isActive }) {
   return (
     <>
-      <button className="button" onClick={onClickParam}>{children}</button>
+      <button className={isActive ? 'button active' : 'button'} onClick={onClick}>{children}</button>
     </>
   )
 }

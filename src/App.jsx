@@ -6,11 +6,11 @@ import { useState } from "react";
 import { ways, differences } from "./data"
 
 export default function App() {
-  const [content, setContent] = useState('Нажми на кнопку')
+  const [contentType, setContentType] = useState(null)
 
   
   const handleClick = (type) => {
-    setContent(type)
+    setContentType(type)
   }
 
   return (
@@ -23,9 +23,13 @@ export default function App() {
           <h3>Автомомбили</h3>
 
           <ul>
-            <WayToTeach title={ways[0].title} description={ways[0].description} />
+            {/* <WayToTeach title={ways[0].title} description={ways[0].description} />
             <WayToTeach {...ways[1]} />
-            <WayToTeach {...ways[2]} />
+            <WayToTeach {...ways[2]} /> */}
+            {ways.map((way) => (
+              <WayToTeach key={way.title} {...way}/>
+            ))}
+
           </ul>
         </section>
 
@@ -33,13 +37,19 @@ export default function App() {
           <h3>Особенности нашей компании</h3>
         </section>
 
+        <section>
+          <Button isActive={contentType === 'way'} onClick={() => handleClick('way')}>Подход</Button>
+          <Button isActive={contentType === 'easy'} onClick={() => handleClick('easy')}>Доступность</Button>
+          <Button isActive={contentType === 'program'} onClick={() => handleClick('program')}>Концентрация</Button>
+
+
+          {contentType && <p>{differences[contentType]}</p>}
+          {!contentType && <p>Click on button</p>}
+
+        </section>
+
       </main>
 
-      <Button onClickParam={() => handleClick('way')}>Подход</Button>
-      <Button onClickParam={() => handleClick('easy')}>Доступность</Button>
-      <Button onClickParam={() => handleClick('program')}>Концентрация</Button>
-
-      <p>{differences[content]}</p>
 
       <Footer />
     </>
