@@ -1,55 +1,33 @@
 import Header from "./Header/Header.jsx"
 import Footer from "./Footer/Footer.jsx"
-import Button from "./Button/Button.jsx"
-import WayToTeach from "./WayToTeach"
+import CarSection from "./CarSection/CarSection.jsx"
+import DifferencesSection from "./DifferencesSection/DifferencesSection.jsx";
+import IntroSection from "./IntroSection/IntroSection.jsx";
+import TabsSection from "./TabsSection/TabsSection.jsx";
+import FeedBackSection from "./FeedBackSection/FeedBackSection.jsx";
 import { useState } from "react";
-import { ways, differences } from "./data"
 
 export default function App() {
-  const [contentType, setContentType] = useState(null)
-
-  
-  const handleClick = (type) => {
-    setContentType(type)
-  }
+  const [tab, setTab] = useState('main')
 
   return (
     <>
       <Header />
 
       <main>
+        <IntroSection />
 
-        <section>
-          <h3>Автомомбили</h3>
+        <TabsSection active={tab} onChange={(current) => setTab(current)}/>
 
-          <ul>
-            {/* <WayToTeach title={ways[0].title} description={ways[0].description} />
-            <WayToTeach {...ways[1]} />
-            <WayToTeach {...ways[2]} /> */}
-            {ways.map((way) => (
-              <WayToTeach key={way.title} {...way}/>
-            ))}
+        {tab === 'main' && (
+          <>
+            <CarSection />
+            <DifferencesSection />
+          </>
+        )}
 
-          </ul>
-        </section>
-
-        <section>
-          <h3>Особенности нашей компании</h3>
-        </section>
-
-        <section>
-          <Button isActive={contentType === 'way'} onClick={() => handleClick('way')}>Подход</Button>
-          <Button isActive={contentType === 'easy'} onClick={() => handleClick('easy')}>Доступность</Button>
-          <Button isActive={contentType === 'program'} onClick={() => handleClick('program')}>Концентрация</Button>
-
-
-          {contentType && <p>{differences[contentType]}</p>}
-          {!contentType && <p>Click on button</p>}
-
-        </section>
-
+        {tab === 'feedback' && <FeedBackSection />}
       </main>
-
 
       <Footer />
     </>

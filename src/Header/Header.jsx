@@ -11,7 +11,7 @@ export default function Header() {
     <>
 		<header>
 			<img src={logo} alt="logo" />
-			<h3>BMW RestRU</h3>
+			<h3>BMW 05</h3>
 
 			<span>Время сейчас: { cotentTime.toLocaleTimeString() } ✔</span>
 		</header>
