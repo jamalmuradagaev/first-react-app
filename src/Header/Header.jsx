@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '../assets/logoBMW.webp';
 import "./Header.css";
 import { useState } from "react";
+// import { styled } from 'style-components'
 
 export default function Header() {
 	let [cotentTime, setCotentTime] = useState(new Date())
