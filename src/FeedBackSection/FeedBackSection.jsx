@@ -1,7 +1,31 @@
 import React from 'react'
-import {useState} from "react";
+import {useState, useRef} from "react";
 import './FeedBackSection.css'
 import Button from "../Button/Button.jsx";
+
+
+function StateVsRef() {
+  const input = useRef()
+  const [show, setShow] = useState(false)
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter'){
+      setShow(true)
+    }
+  }
+
+  return (
+    <div>
+      <h3>Введите что-то: {show && input.current.value}</h3>
+      <input 
+        type="text" 
+        ref={input}
+        className='control'
+        onKeyDown={handleKeyDown}
+      />
+    </div>
+  )
+}
 
 export default function FeedBackSection() {
   const [form, setForm] = useState({
@@ -71,6 +95,8 @@ export default function FeedBackSection() {
         </pre>
 
         <Button disabled={form.hasError} >Отправить</Button>
+
+        <StateVsRef />
       </form>
     </section>
   )
