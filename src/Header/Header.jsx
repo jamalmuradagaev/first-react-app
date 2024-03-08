@@ -2,11 +2,20 @@ import React from 'react'
 import logo from '../assets/logoBMW.webp';
 import "./Header.css";
 import { useState } from "react";
+import { useEffect } from 'react';
 // import { styled } from 'style-components'
 
 export default function Header() {
 	let [cotentTime, setCotentTime] = useState(new Date())
-	setInterval(() => setCotentTime(new Date()), 1000);
+	// setInterval(() => setCotentTime(new Date()), 1000);
+
+	useEffect(() => {
+		const interval = setInterval(() => setCotentTime(new Date()), 1000)
+
+		return () => {
+			clearInterval(interval)
+		}
+	}, [])
 
   return (
     <>
